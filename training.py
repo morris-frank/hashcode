@@ -1,3 +1,4 @@
+from collections import defaultdict
 from argparse import ArgumentParser
 from os.path import abspath
 import random
@@ -30,10 +31,18 @@ def main(file):
         L_choices.remove(l_i)
         L.append(l_i)
         n_sign_up_days_temp += L_signuptimes[l_i]
-    
-    books = {}
+
+    d = 0
+    books = defaultdict(list)
+    _book_sets = defaultdict(set)
     for l in L:
-        books_list = []
+        d += L_signuptimes[l]
+        n_scans_per_lib = (D - d) * L_shipperday
+        while len(books[l]) < n_scans_per_lib:
+            book = random.choice(L_books[l])
+            if book not in _book_sets[l]:
+                books[l].append(book)
+                _book_sets[l].add(book)
 
     for it in range(n_iter):
         L, books, not_L = mutate(L, books, D, L_signuptimes, L_shipperday, not_L, library_books_sorted)
