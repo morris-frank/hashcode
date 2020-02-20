@@ -3,10 +3,10 @@ from argparse import ArgumentParser
 from os.path import abspath
 import random
 
-from .fitness import fitness
+from fitness import fitness
 from mutate import mutate
-from .read_in import read_in
-from .saving import save_submission
+from read_in import read_in
+from saving import save_submission
 
 
 def main(file):
