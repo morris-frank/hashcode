@@ -1,5 +1,5 @@
-from typing import List, Dict
 import random
+
 from heuristic_1 import get_best_book_order
 
 
