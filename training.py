@@ -52,11 +52,12 @@ def main(file):
 
     max_L, max_books = L, books
     for it in range(n_iter):
-        L, books, not_L = mutate(max_L.copy(), max_books.copy(), D, L_signuptimes, L_shipperday, not_L, library_books_sorted)
         improve(L, books, L_signuptimes, L_shipperday, D)
-        print("HEre", flush=True)
-        score = fitness(L, books, D, B_scores, L_signuptimes, L_shipperday)
-        print(f"iter={it}, score={score}")
+        #print("HEre", flush=True)
+        L, books, not_L, score = mutate(max_L.copy(), max_books.copy(), D, L_signuptimes, L_shipperday, not_L, library_books_sorted)
+        #score = fitness(L, books, D, B_scores, L_signuptimes, L_shipperday)
+        score = sum([B_scores[s] for s in score])
+        #print(f"iter={it}, score={score}")
 
         if score > max_score:
             max_score = score

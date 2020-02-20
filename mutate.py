@@ -21,7 +21,7 @@ def mutate(L, books, D, L_signuptimes, L_shipperday, not_L, library_books_sorted
         not_L.append(L[l_to_remove])
         L.pop(l_to_remove)
         while sum_of_L_days < D:
-            l_to_add = random.randint(0, len(not_L))
+            l_to_add = random.randint(0, len(not_L)-1)
             library_i_to_add = not_L[l_to_add]
             
             not_L.pop(l_to_add)
@@ -33,7 +33,7 @@ def mutate(L, books, D, L_signuptimes, L_shipperday, not_L, library_books_sorted
         l_i = L[l_to_switch_1]
         L[l_to_switch_1] = L[l_to_switch_2]
         L[l_to_switch_2] = l_i
-    #books, new_fit = get_best_book_order(L, D, library_books_sorted, L_shipperday)
+    books, new_fit = get_best_book_order(L, D, library_books_sorted, L_shipperday)
 
 
-    return L, books, not_L
+    return L, books, not_L, new_fit
