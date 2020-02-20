@@ -1,6 +1,5 @@
 from typing import List, Dict
 
-
 setup_times = dict()  # lib id ⇒ time to setup
 scanning_n = dict()  # lib id ⇒ num of books scannable
 scores = dict()  # book id ⇒ score
@@ -20,9 +19,11 @@ def setup_active_library_list(L: List[int], D: int):
 
 
 # Optimization function, active_libs comes from above
-def fitness(L: List[int], books: Dict[List[int]], active_libs):
+def fitness(L: List[int], books: Dict[List[int]]):
     assert len(books) == L
     scanned_books = set()
+
+    active_libs = setup_active_library_list(L, D)
 
     score = 0.
     for d in range(D):
