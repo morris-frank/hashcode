@@ -1,28 +1,48 @@
 from argparse import ArgumentParser
 from os.path import abspath
+import random
 
 from .fitness import fitness
-from .mutate import mutate
+from mutate import mutate
 from .read_in import read_in
 from .saving import save_submission
 
 
 def main(file):
-    n_iter = 100
+    n_iter = 10000000
 
     B_scores, L_books, L_signuptimes, L_shipperday, D, B_id_set, L_id_set = read_in(
         file)
+    library_books_sorted = []
+
+    for l in L_books:
+    #l is list of books
+        library_books_sorted.append(l.sorted(key=lambda i: B_scores[i]), reversed=True)
 
     max_score = 0.
     max_individual = None
-    for it in range(n_iter):
-        L, books = mutate(L, books)
 
+    L = []
+    n_sign_up_days_temp = 0
+    L_choices = [l for l in L]
+    while n_sign_up_days_temp < D:
+        l_i = random.choice(L_choices)
+        L_choices.remove(l_i)
+        L.append(l_i)
+        n_sign_up_days_temp += L_signuptimes[l_i]
+    
+    books = {}
+    for l in L:
+        books_list = []
+
+    for it in range(n_iter):
+        L, books, not_L = mutate(L, books, D, L_signuptimes, L_shipperday, not_L, library_books_sorted)
         score = fitness(L, books, D, B_scores, L_signuptimes, L_shipperday)
 
         if score > max_score:
             max_score = score
             max_individual = (L.copy(), books.copy())
+            print("New max", max_score)
 
     save_submission(*max_individual)
 

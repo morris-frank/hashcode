@@ -1,16 +1,8 @@
 import math
 
-books_score = [3,2,1]
-library_books = [{}, {}]
-library_books_sorted = []
-library_books_per_day = []
-n_days = 300
 
-for l in library_books:
-    #l is list of books
-    library_books_sorted.append(l.sorted(key=lambda i: books_score[i]))
 
-def get_best_book_order(libs_order, books_score):
+def get_best_book_order(libs_order, n_days, library_books_sorted, library_books_per_day):
     added_books = set()
     res = []
     current_day = 0

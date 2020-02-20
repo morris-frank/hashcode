@@ -26,5 +26,5 @@ def read_in(filename):
     L_id_set = set(range(len(L_books)))
 
     return B_scores, L_books, L_signuptimes, L_shipperday, D, B_id_set, L_id_set
-    
+
 
