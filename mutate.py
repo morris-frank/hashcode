@@ -17,19 +17,19 @@ def mutate(L, books, D, L_signuptimes, L_shipperday, not_L, library_books_sorted
     get_best_book_order(L, D, library_books_sorted, L_shipperday)
     random_r = random.random()
     if random_r < 0.5:
-        l_to_remove = random.randin(0, len(L))        
+        l_to_remove = random.randint(0, len(L)-1)        
         L.pop(l_to_remove)
         not_L.append(l_to_remove)
         while sum_of_L_days < D:
-            l_to_add = random.randint(0, len(not_L))
+            l_to_add = random.randint(0, len(not_L)-1)
             library_i_to_add = not_L[l_to_add]
             
             not_L.pop(l_to_add)
             L.append(library_i_to_add)
             sum_of_L_days += L_signuptimes[library_i_to_add]
     else:
-        l_to_switch_1 = random.randint(0, len(L))
-        l_to_switch_2 = random.randint(0, len(L))
+        l_to_switch_1 = random.randint(0, len(L)-1)
+        l_to_switch_2 = random.randint(0, len(L)-1)
         l_i = L[l_to_switch_1]
         L[l_to_switch_1] = L[l_to_switch_2]
         L[l_to_switch_2] = l_i

@@ -17,7 +17,7 @@ def main(file):
     library_books_sorted = defaultdict(list)
 
     for l, _books in L_books.items():
-        library_books_sorted[l].append(sorted(_books, key=lambda i: B_scores[i], reverse=True))
+        library_books_sorted[l] = sorted(_books, key=lambda i: B_scores[i], reverse=True)
 
     max_score = 0.
     max_individual = None

@@ -14,7 +14,7 @@ def setup_active_library_list(L, D, L_signuptimes):
 
 # Optimization function, active_libs comes from above
 def fitness(L, books, D, B_scores, L_signuptimes, L_shipperday):
-    assert len(books) == L
+    assert len(books) == len(L)
     scanned_books = set()
 
     active_libs = setup_active_library_list(L, D, L_signuptimes)
