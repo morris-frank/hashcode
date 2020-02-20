@@ -49,17 +49,19 @@ def main(file):
             if j >= 5 * len(L_books[l]):
                 break
 
+    max_L, max_books = L, books
     for it in range(n_iter):
-        L, books, not_L = mutate(L, books, D, L_signuptimes, L_shipperday, not_L, library_books_sorted)
+        L, books, not_L = mutate(max_L.copy(), max_books.copy(), D, L_signuptimes, L_shipperday, not_L, library_books_sorted)
         score = fitness(L, books, D, B_scores, L_signuptimes, L_shipperday)
         print(f"iter={it}, score={score}")
 
         if score > max_score:
             max_score = score
-            max_individual = (L.copy(), books.copy())
             print("New max", max_score)
+            max_L, max_books = L, books
+            save_submission(max_L, max_books)
 
-    save_submission(*max_individual)
+    save_submission(max_L, max_books)
 
 
 if __name__ == '__main__':
