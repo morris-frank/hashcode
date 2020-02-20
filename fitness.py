@@ -1,38 +1,35 @@
 from typing import List, Dict
 
-setup_times = dict()  # lib id ⇒ time to setup
-scanning_n = dict()  # lib id ⇒ num of books scannable
-scores = dict()  # book id ⇒ score
-D = 100  # number of days
-
 
 # Do this at beginning of new training
-def setup_active_library_list(L: List[int], D: int):
+def setup_active_library_list(L: List[int], D: int, L_signuptimes):
     # Contains list of active libraries on that day (filling up)
     active_libs = [[] for _ in range(D)]
     i = 0
     for l in L:
-        i += setup_times[l]
+        i += L_signuptimes[l]
+        if i >= D:
+            break
         for j in range(i, D):
             active_libs[j].append(l)
     return active_libs
 
 
 # Optimization function, active_libs comes from above
-def fitness(L: List[int], books: Dict[List[int]]):
+def fitness(L: List[int], books: Dict[List[int]], D, B_scores, L_signuptimes, L_shipperday):
     assert len(books) == L
     scanned_books = set()
 
-    active_libs = setup_active_library_list(L, D)
+    active_libs = setup_active_library_list(L, D, L_signuptimes)
 
     score = 0.
     for d in range(D):
         for lib in active_libs[d]:
-            for _ in scanning_n[lib]:
+            for _ in L_shipperday[lib]:
                 book = books[lib].pop(0)
                 if book not in scanned_books:
                     scanned_books.add(book)
-                    score += scores[book]
+                    score += B_scores[book]
     return score
 
 
