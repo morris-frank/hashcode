@@ -4,6 +4,7 @@ from os.path import abspath
 from .fitness import fitness
 from .mutate import mutate
 from .read_in import read_in
+from .saving import save_submission
 
 
 def main(file):
@@ -23,7 +24,7 @@ def main(file):
             max_score = score
             max_individual = (L.copy(), books.copy())
 
-    print(max_individual)
+    save_submission(*max_individual)
 
 
 if __name__ == '__main__':
