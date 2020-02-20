@@ -23,10 +23,11 @@ def fitness(L, books, D, B_scores, L_signuptimes, L_shipperday):
     for d in range(D):
         for lib in active_libs[d]:
             for _ in range(L_shipperday[lib]):
-                book = books[lib].pop(0)
-                if book not in scanned_books:
-                    scanned_books.add(book)
-                    score += B_scores[book]
+                if len(books[lib]) > 0:
+                    book = books[lib].pop(0)
+                    if book not in scanned_books:
+                        scanned_books.add(book)
+                        score += B_scores[book]
     return score
 
 
