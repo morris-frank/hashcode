@@ -62,7 +62,7 @@ def main(file):
             max_score = score
             print("New max", max_score)
             max_L, max_books = L, books
-            save_submission(max_L, max_books)
+            save_submission(max_L, max_books, "max_ind")
 
     save_submission(max_L, max_books)
 

@@ -1,5 +1,5 @@
 def fitness(L, books, D, B_scores, L_signuptimes, L_shipperday):
-    assert len(books) == len(L)
+    #assert len(books) == len(L)
 
     score = 0.
 

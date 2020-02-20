@@ -2,7 +2,7 @@ import math
 
 def get_best_book_order(libs_order, n_days, library_books_sorted, library_books_per_day):
     added_books = set()
-    res = []
+    res = {}
     current_day = 0
     for l in libs_order:
         books_sorted = library_books_sorted[l]
@@ -22,7 +22,7 @@ def get_best_book_order(libs_order, n_days, library_books_sorted, library_books_
                     current_day_temp += 1
                     if current_day_temp == n_days:
                         break
-        res.append(books_added)
+        res[l] = books_added
         added_books |= set(books_added)
     return res, added_books
 
@@ -31,6 +31,6 @@ def improve(L, books, L_signuptimes, L_booksrate, D):
     for i, l in enumerate(L[0:len(L)-1]):
         if current_time + L_signuptimes[L[i + 1]] + (len(books[l]) / L_booksrate[l]) < D:
             going_up_l = L[i]
-            l[i] = L[i + 1]
-            l[i+1] = going_up_l
+            L[i] = L[i + 1]
+            L[i+1] = going_up_l
         current_time += L_signuptimes[L[i]]
