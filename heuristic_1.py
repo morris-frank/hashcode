@@ -29,6 +29,8 @@ def get_best_book_order(libs_order, n_days, library_books_sorted, library_books_
 def improve(L, books, L_signuptimes, L_booksrate, D):
     current_time = 0
     for i, l in enumerate(L[0:len(L)-1]):
-        while(True):       
-            if current_time + L_signuptimes[l] + (len(books[l]) / L_booksrate) < D and current_time + L_signuptimes[L[i + 1]] + (len(books[l]) / L_booksrate):
-                pass
+        if current_time + L_signuptimes[L[i + 1]] + (len(books[l]) / L_booksrate[l]) < D:
+            going_up_l = L[i]
+            l[i] = L[i + 1]
+            l[i+1] = going_up_l
+        current_time += L_signuptimes[L[i]]

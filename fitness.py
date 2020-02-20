@@ -34,5 +34,3 @@ def fitness(L, books, D, B_scores, L_signuptimes, L_shipperday):
                         score += B_scores[book]
                     i_L[lib] += 1
     return score
-
-

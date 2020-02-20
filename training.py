@@ -7,6 +7,7 @@ from fitness import fitness
 from mutate import mutate
 from read_in import read_in
 from saving import save_submission
+from heuristic_1 import improve
 
 
 def main(file):
@@ -52,6 +53,8 @@ def main(file):
     max_L, max_books = L, books
     for it in range(n_iter):
         L, books, not_L = mutate(max_L.copy(), max_books.copy(), D, L_signuptimes, L_shipperday, not_L, library_books_sorted)
+        improve(L, books, L_signuptimes, L_shipperday, D)
+        print("HEre", flush=True)
         score = fitness(L, books, D, B_scores, L_signuptimes, L_shipperday)
         print(f"iter={it}, score={score}")
 
