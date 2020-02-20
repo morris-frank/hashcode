@@ -10,7 +10,7 @@ def find_order_with_most_books_scanned(L, D, L_signuptimes, L_shipperday):
     return sorted(L, key=weighting)
 
 #library books sorted are list of lists, rows are library_id and cols are books_ids from big to small score
-def mutate(L: List[int], books: Dict[List[int]], D, L_signuptimes, L_shipperday, not_L, library_books_sorted):
+def mutate(L, books, D, L_signuptimes, L_shipperday, not_L, library_books_sorted):
     #L = find_order_with_most_books_scanned(L, D, L_signuptimes, L_shipperday)
     
     sum_of_L_days = sum([L_signuptimes[l] for l in L])
