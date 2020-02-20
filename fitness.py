@@ -25,7 +25,7 @@ def fitness(L: List[int], books: Dict[List[int]], D, B_scores, L_signuptimes, L_
     score = 0.
     for d in range(D):
         for lib in active_libs[d]:
-            for _ in L_shipperday[lib]:
+            for _ in range(L_shipperday[lib]):
                 book = books[lib].pop(0)
                 if book not in scanned_books:
                     scanned_books.add(book)
