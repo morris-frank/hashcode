@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 # Do this at beginning of new training
 def setup_active_library_list(L, D, L_signuptimes):
     # Contains list of active libraries on that day (filling up)
@@ -19,15 +21,18 @@ def fitness(L, books, D, B_scores, L_signuptimes, L_shipperday):
 
     active_libs = setup_active_library_list(L, D, L_signuptimes)
 
+    i_L = defaultdict(int)
+
     score = 0.
     for d in range(D):
         for lib in active_libs[d]:
             for _ in range(L_shipperday[lib]):
-                if len(books[lib]) > 0:
-                    book = books[lib].pop(0)
+                if i_L[lib] < len(books[lib]) - 1:
+                    book = books[lib][i_L[lib]]
                     if book not in scanned_books:
                         scanned_books.add(book)
                         score += B_scores[book]
+                    i_L[lib] += 1
     return score
 
 
