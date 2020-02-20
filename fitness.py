@@ -1,8 +1,5 @@
-from typing import List, Dict
-
-
 # Do this at beginning of new training
-def setup_active_library_list(L: List[int], D: int, L_signuptimes):
+def setup_active_library_list(L, D, L_signuptimes):
     # Contains list of active libraries on that day (filling up)
     active_libs = [[] for _ in range(D)]
     i = 0
@@ -16,7 +13,7 @@ def setup_active_library_list(L: List[int], D: int, L_signuptimes):
 
 
 # Optimization function, active_libs comes from above
-def fitness(L: List[int], books: Dict[List[int]], D, B_scores, L_signuptimes, L_shipperday):
+def fitness(L, books, D, B_scores, L_signuptimes, L_shipperday):
     assert len(books) == L
     scanned_books = set()
 
